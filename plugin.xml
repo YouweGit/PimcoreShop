@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<zend-config xmlns:zf="http://framework.zend.com/xml/zend-config-xml/1.0/">
+		<plugin>
+            <pluginName>PimcoreShop</pluginName>
+			<pluginDescription><![CDATA[Some magic used for shop functionality]]></pluginDescription>
+            <pluginVersion>1.0</pluginVersion>
+            <pluginRevision>1</pluginRevision>
+            <pluginBuildTimestamp>0</pluginBuildTimestamp>
+            <pluginIframeSrc></pluginIframeSrc>
+			<pluginClassName>\PimcoreShop\Plugin</pluginClassName>
+			<pluginIncludePaths>
+				<path>/PimcoreShop/lib</path>
+			</pluginIncludePaths>
+			<pluginNamespaces>
+				<namespace>PimcoreShop</namespace>
+			</pluginNamespaces>
+			<pluginJsPaths>
+                <path>/plugins/PimcoreShop/static/js/startup.js</path>
+			</pluginJsPaths>
+			<pluginCssPaths>
+                <path>/plugins/PimcoreShop/static/css/example.css</path>
+			</pluginCssPaths>
+		</plugin>
+</zend-config>

@@ -1,0 +1,2 @@
+
+PimcoreShop Plugin works!
