@@ -11,3 +11,8 @@ Installation
 composer require youwe/pimcore-shop
 ```
 
+Add to /.gitignore :
+
+```
+/plugins/PimcoreShop
+```
