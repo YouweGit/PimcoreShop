@@ -18,10 +18,11 @@ class Plugin extends PluginLib\AbstractPlugin implements PluginLib\PluginInterfa
 
             if(get_class($object) == 'Pimcore\Model\Object\Product') {
 
+                /* @var \Pimcore\Model\Object\Product $object */
                 // make sure the connections to the site(s) exist
                 $sitesLister = new \Pimcore\Model\Object\Site\Listing();
                 $sites = $sitesLister->getObjects();
-                $siteProds = $object->getProductSites();
+                $siteProds = $object->getProductSites()?:[];
                 $siteIds = [];
 
                 foreach($siteProds as $siteProd) {
@@ -48,6 +49,38 @@ class Plugin extends PluginLib\AbstractPlugin implements PluginLib\PluginInterfa
 
             }
         });
+
+
+
+        // using anonymous function
+        \Pimcore::getEventManager()->attach("asset.postAdd", function ($event) {
+
+            \Pimcore\Log\Simple::log('asset-post-add', 'triggered');
+
+            // do something
+            $object = $event->getTarget();
+
+            // ["folder", "image", "text", "audio", "video", "document", "archive", "unknown"];
+
+            if(in_array($object->getType(), ['text', 'document', 'archive', 'unknown'])) {
+
+                /* @var \Pimcore\Model\Asset $object */
+                // name,                type,       data,       inherited,      inheritable
+                // ArticleNumber
+                // CategoryNumber
+                // Assets Categories
+
+                $object->setCustomSetting('ArticleNumber', null);
+                $object->setProperty('ArticleNumber', 'Text', null, null, true);
+                $object->setProperty('CategoryNumber', 'Text', null, null, true);
+                $object->setProperty('AssetCategory1', 'Object', null, null, true);
+                $object->setProperty('AssetCategory2', 'Object', null, null, true);
+                $object->setProperty('AssetCategory3', 'Object', null, null, true);
+                $object->save();
+
+            }
+        });
+
     }
 
     public static function install()
