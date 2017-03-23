@@ -15,10 +15,11 @@
 				<namespace>PimcoreShop</namespace>
 			</pluginNamespaces>
 			<pluginJsPaths>
+                <path>/plugins/PimcoreShop/static/js/filesPanel.js</path>
                 <path>/plugins/PimcoreShop/static/js/startup.js</path>
 			</pluginJsPaths>
 			<pluginCssPaths>
-                <path>/plugins/PimcoreShop/static/css/example.css</path>
+                <!--<path>/plugins/PimcoreShop/static/css/example.css</path>-->
 			</pluginCssPaths>
 		</plugin>
 </zend-config>
