@@ -6,10 +6,6 @@ pimcore.plugin.pimcoreshop = Class.create(pimcore.plugin.admin, {
     },
 
     filesTabName: 'FilesTab',
-    // taxonomiesTabName: 'productTaxonomies',
-    // dealTreeViewTabName: 'dealTreeView',
-    // dealAdditionalMarginViewName: 'additionalMarginsTab',
-    // brandSuppliersTabName: 'brandSuppliers',
     // supplierTreeViewTabName: 'supplierTreeView',
     // supplierTasksViewTabName: 'supplierTasksView',
 
@@ -51,33 +47,14 @@ pimcore.plugin.pimcoreshop = Class.create(pimcore.plugin.admin, {
                 return this.layout;
             },
             detectTab: function (items) {
-                console.log(items);
-                // start of my custom solution
                 if (items.length > 0) {
-                    // I don't know what I'm doing but it works *shrug*
                     for (var i = 0; i < items[0].items.length; i++) {
                         var item = items[0].items[i];
 
                         switch (item.name) {
                             case pimcoreshopPlugin.filesTabName:
-                                // alert('ASDF');
                                 this.relationsPanel = filesPanel.getPanel(this.object.data.general.o_id);
                                 break;
-                            // case pimcoreshop.dealAdditionalMarginViewName:
-                            //     items[0].items[i].items = [dealAdditionalMarginPanel.getPanel(this.object.data.general.o_id)];
-                            //     break;
-                            // case pimcoreshop.dealTreeViewTabName:
-                            //     this.relationsPanel = dealPanel.getPanel(this.object.data.general.o_id);
-                            //     break;
-                            // case pimcoreshop.brandSuppliersTabName:
-                            //     this.relationsPanel = brandPanel.getPanel(this.object.data.general.o_id);
-                            //     break;
-                            // case pimcoreshop.supplierTreeViewTabName:
-                            //     this.relationsPanel = supplierPanel.getPanel(this.object.data.general.o_id);
-                            //     break;
-                            // case pimcoreshop.supplierTasksViewTabName:
-                            //     this.relationsPanel = supplierTasksPanel.getPanel(this.object.data.general.o_id);
-                            //     break;
                         }
 
                         if (this.relationsPanel !== null) {
