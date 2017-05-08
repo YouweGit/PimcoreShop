@@ -31,28 +31,30 @@ class PimcoreShop_AssetfileController extends \Pimcore\Controller\Action\Admin
         $sku = $product->getSku();
         // get assets where property ProductNumber == $sku
 
-        $select = $this->db->select()
-            ->from(['properties' => 'properties'], ['cid'])
-            ->where('properties.ctype = ?', 'asset')
-            ->where('properties.type = ?', 'text')
-            ->where('properties.name = ?', 'ArticleNumber')
-            ->where('properties.data = ?', $sku);
-        $rows = $this->db->fetchAll($select);
+        if($sku) {
+            $select = $this->db->select()
+                ->from(['properties' => 'properties'], ['cid'])
+                ->where('properties.ctype = ?', 'asset')
+                ->where('properties.type = ?', 'text')
+                ->where('properties.name = ?', 'ArticleNumber')
+                ->where('properties.data = ?', $sku);
+            $rows = $this->db->fetchAll($select);
 
-        foreach($rows as $row) {
-            $asset = \Pimcore\Model\Asset::getById($row['cid']);
-            $record = [
-                'id'            => $rowId++,
-                'asset_id'      => $asset->getId(),
-                'file'          => $asset->getFilename(),
-                'type'          => $asset->getType(),
-                'path'          => $asset->getPath(),
-                'mimetype'      => $asset->getMimetype(),
-                'relation'      => 'ArticleNumber',
-                'relation_id'   => null,
-                'asset_url'     => '/website/var/assets' . $asset->getRealFullPath()
-            ];
-            $data['data'][] = $record;
+            foreach($rows as $row) {
+                $asset = \Pimcore\Model\Asset::getById($row['cid']);
+                $record = [
+                    'id'            => $rowId++,
+                    'asset_id'      => $asset->getId(),
+                    'file'          => $asset->getFilename(),
+                    'type'          => $asset->getType(),
+                    'path'          => $asset->getPath(),
+                    'mimetype'      => $asset->getMimetype(),
+                    'relation'      => 'ArticleNumber',
+                    'relation_id'   => null,
+                    'asset_url'     => '/website/var/assets' . $asset->getRealFullPath()
+                ];
+                $data['data'][] = $record;
+            }
         }
 
         $categories = $product->getCategories();
