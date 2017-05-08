@@ -89,8 +89,6 @@ class PimcoreShop_AssetfileController extends \Pimcore\Controller\Action\Admin
                 }
             }
 
-            $catId = $category->getId();
-
             // get assets where property AssetCategory1 == $category
             // get assets where property AssetCategory2 == $category
             // get assets where property AssetCategory3 == $category
@@ -100,7 +98,7 @@ class PimcoreShop_AssetfileController extends \Pimcore\Controller\Action\Admin
                 ->where('properties.ctype = ?', 'asset')
                 ->where('properties.type = ?', 'object')
                 ->where('properties.name = ?', 'AssetCategory1')
-                ->where('properties.data = ?', $catId);
+                ->where('properties.data = ?', $category->getId());
             $rows = $this->db->fetchAll($select);
 
             foreach($rows as $row) {
@@ -124,7 +122,7 @@ class PimcoreShop_AssetfileController extends \Pimcore\Controller\Action\Admin
                 ->where('properties.ctype = ?', 'asset')
                 ->where('properties.type = ?', 'object')
                 ->where('properties.name = ?', 'AssetCategory2')
-                ->where('properties.data = ?', $catId);
+                ->where('properties.data = ?', $category->getId());
             $rows = $this->db->fetchAll($select);
 
             foreach($rows as $row) {
@@ -148,7 +146,7 @@ class PimcoreShop_AssetfileController extends \Pimcore\Controller\Action\Admin
                 ->where('properties.ctype = ?', 'asset')
                 ->where('properties.type = ?', 'object')
                 ->where('properties.name = ?', 'AssetCategory3')
-                ->where('properties.data = ?', $catId);
+                ->where('properties.data = ?', $category->getId());
             $rows = $this->db->fetchAll($select);
 
             foreach($rows as $row) {
