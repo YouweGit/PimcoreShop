@@ -1,0 +1,28 @@
+body {
+    background: #EC1946 !important;
+}
+
+#footright {
+    height: 1000px;
+    width: 1000px;
+    z-index: 1;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    background: url(/plugins/PimcoreShop/static/img/youwe-pimcore-mage-suite.png) no-repeat bottom right;
+}
+
+#footleft {
+    height: 512px;
+    width: 512px;
+    z-index: 1;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background: url(/plugins/PimcoreShop/static/img/youwe-logo.png) no-repeat bottom left;
+}
+
+#footer {
+    display: none;
+}
+

@@ -3,12 +3,15 @@
 namespace PimcoreShop;
 
 use Pimcore\API\Plugin as PluginLib;
+use PimcoreShop\Controller\Plugin\LoginPlugin;
 
 class Plugin extends PluginLib\AbstractPlugin implements PluginLib\PluginInterface
 {
     public function init()
     {
         parent::init();
+
+        // WHEN A PRODUCT IS ADDED, AUTOMATICALL ADD ALL SITES TO IT!!!!
 
         // using anonymous function
         \Pimcore::getEventManager()->attach("object.preAdd", function ($event) {
@@ -52,6 +55,8 @@ class Plugin extends PluginLib\AbstractPlugin implements PluginLib\PluginInterfa
 
 
 
+        // WHEN AN ASSET IS UPLOADED, AND ITS A DOCUMENT, AUTOMATICALLY ADD THE PROPERTIES (WITHOUT VALUES)
+
         // using anonymous function
         \Pimcore::getEventManager()->attach("asset.postAdd", function ($event) {
 
@@ -80,6 +85,19 @@ class Plugin extends PluginLib\AbstractPlugin implements PluginLib\PluginInterfa
 
             }
         });
+
+
+
+        // ADD A FEW DIVS TO THE LOGIN PAGE FOR CUSTOM GRAPHICS ON THE LOGIN PAGE
+
+        \Pimcore::getEventManager()->attach('system.startup', function (\Zend_EventManager_Event $e) {
+            $frontController = $e->getTarget();
+
+            if ($frontController instanceof \Zend_Controller_Front) {
+                $frontController->registerPlugin(new LoginPlugin());
+            }
+        });
+
 
     }
 
